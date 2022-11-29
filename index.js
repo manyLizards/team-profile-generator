@@ -18,13 +18,13 @@ const start = [
     {
         type: 'input',
         name: 'email',
-        message: "Please enter the team manager's email.",
+        message: "Please enter the team manager's email address.",
     },
     {
         type: 'input',
         name: 'manager-number',
         message: "Please enter the team manager's office number.",
-    },
+    }
 ]
 
     // add option to choose intern or engineer
@@ -43,5 +43,29 @@ const engineer = [
         type: 'input',
         name: 'engineer-name',
         message: "Please enter the engineer's name."
+    },
+    {
+        type: 'input',
+        name: 'engineer-id',
+        message: "Please enter the engineer's ID."
+    },
+    {
+        type: 'email',
+        name: 'engineer-email',
+        message: "Please enter the engineer's email address."
+    },
+    {
+        type: 'input',
+        name: 'engineer-github',
+        message: "Please enter the engineer's GitHub username."
+    }
+]
+
+//Create an array of questions for user input regarding an intern
+const intern = [
+    {
+        type: 'input',
+        name: 'intern-name',
+        message: "Please enter the intern's name."
     }
 ]
