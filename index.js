@@ -1,7 +1,7 @@
 //Include Inquirer, file system, and generateMarkdown
 const inquirer = require('inquirer');
 const fs = require('fs');
-const generateMarkdown = require('../utils/generateMarkdown');
+const generateHTML = require('../utils/generateHTML');
 
 //Create an array of questions for user input regarding manager information
 const start = [
