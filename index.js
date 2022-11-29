@@ -67,5 +67,20 @@ const intern = [
         type: 'input',
         name: 'intern-name',
         message: "Please enter the intern's name."
+    },
+    {
+        type: 'input',
+        name: 'intern-id',
+        message: "Please enter the intern's ID."
+    },
+    {
+        type: 'input',
+        name: 'intern-email',
+        message: "Please enter the intern's email address."
+    },
+    {
+        type: 'input',
+        name: 'intern-school',
+        message: "Please enter the intern's school."
     }
 ]
