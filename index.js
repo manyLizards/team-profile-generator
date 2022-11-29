@@ -11,4 +11,19 @@ const questions = [
         name: 'manager-name',
         message: "Please enter the team manager's name",
     },
+    {
+        type: 'input',
+        name: 'manager-id',
+        message: "Please enter the team manager's ID",
+    },
+    {
+        type: 'input',
+        name: 'email',
+        message: "Please enter the team manager's email",
+    },
+    {
+        type: 'input',
+        name: 'manager-number',
+        message: "Please enter the team manager's office number",
+    },
 ]
