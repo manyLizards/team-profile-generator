@@ -84,3 +84,11 @@ const intern = [
         message: "Please enter the intern's school."
     }
 ]
+
+//Create a function to initialize the start questionnaire and lead to the menu
+
+//Lead to intern or engineer questionnaire or finish the questionnaire depending on user input from menu
+
+//Create a function to write the HTML file
+
+//Function call to initialize app
