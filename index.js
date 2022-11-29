@@ -26,4 +26,11 @@ const questions = [
         name: 'manager-number',
         message: "Please enter the team manager's office number",
     },
+    // add option to choose intern or engineer
+    {
+        type: 'checkbox',
+        name: 'intern-engineer-finish',
+        message: "Add a team member or finish building your team.",
+        choices: ['Add an engineer', 'Add an intern', 'Finish building your team']
+    },
 ]
