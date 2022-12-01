@@ -1,7 +1,7 @@
 //Include Inquirer, file system, and generateMarkdown
 const inquirer = require('inquirer');
 const fs = require('fs');
-const generateHTML = require('../utils/generateHTML');
+const generateHTML = require('./utils/generateHTML');
 
 //Create an array of questions for user input regarding manager information
 const start = [
@@ -86,9 +86,14 @@ const intern = [
 ]
 
 //Create a function to initialize the start questionnaire and lead to the menu
+function startApp() {
+    console.log("Initializing App")
+    //Create individual functions for each task (create manager/call menu/ intern/engineer/finish)
+}
 
 //Lead to intern or engineer questionnaire or finish the questionnaire depending on user input from menu
 
 //Create a function to write the HTML file
 
 //Function call to initialize app
+startApp()

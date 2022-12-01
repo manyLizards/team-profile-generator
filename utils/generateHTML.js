@@ -1,4 +1,7 @@
 // Create a function to generate HTML
 function generateHTML(data) {
-    return `<h1> My Team </h1>`
+    let teamTemplate = `<h1> My Team </h1>`
+    return teamTemplate
 }
+
+module.exports = generateHTML
