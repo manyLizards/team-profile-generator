@@ -88,7 +88,7 @@ const intern = [
 //Create a function to initialize the start questionnaire and lead to the menu
 function startApp() {
     console.log("Initializing App")
-    //Create individual functions for each task (create manager/call menu/ intern/engineer/finish)
+    //Create individual functions for each task (create manager/call menu/intern/engineer/finish)
 }
 
 //Lead to intern or engineer questionnaire or finish the questionnaire depending on user input from menu
