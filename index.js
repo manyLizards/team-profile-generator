@@ -2,6 +2,8 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 const generateHTML = require('./dist/generateHTML');
+const jest = require('jest');
+const officeTeam = [];
 
 //Create an array of questions for user input regarding manager information
 const start = [
@@ -86,14 +88,47 @@ const intern = [
 ]
 
 //Create a function to initialize the start questionnaire and lead to the menu
-function startApp() {
+function questions(questionArray) {
     console.log("Initializing App")
-    //Create individual functions for each task (create manager/call menu/intern/engineer/finish)
+    inquirer
+    .prompt(questionArray)
+    .then((employee) => {
+        officeTeam.push(employee);
+//Lead to intern or engineer questionnaire or finish the questionnaire depending on user input from menu
+        if (employee.continue === 'Add an engineer') {
+            ask(engineer);
+        } else if (employee.continue === 'Add an intern') {
+            ask(intern);
+        } else {
+            createProfile(officeTeam);
+        }
+    })
+    .catch((er) => console.log(er));
 }
 
-//Lead to intern or engineer questionnaire or finish the questionnaire depending on user input from menu
-
 //Create a function to write the HTML file
+function createProfile(officeTeam) {
+    const profiles = officeTeam.map((employee) => {
+        const { name, id, email } = employee;
+        return new Manager(name, id, email, officeNumber);
+    })
+    
+    if(employee.hasOwnProperty("officeNumber")) {
+        const { officeNumber } = employee;
+        return new Manager(name, id, email, officeNumber);
+    }
+    
+    if(employee.hasOwnProperty('github')) {
+        const {github} = employee;
+        return new Engineer(name, id, email, github);
+    }
+    
+    if(employee.hasOwnProperty('school')) {
+        const {github} = employee;
+        return new Intern(name, id, email, github);
+    }
+}
 
 //Function call to initialize app
-startApp()
+
+questions(start)
