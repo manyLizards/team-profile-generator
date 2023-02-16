@@ -2,10 +2,18 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 const generateHTML = require('./dist/generateHTML');
-const jest = require('jest');
-const officeTeam = [];
 
-//Create an array of questions for user input regarding manager information
+//jest
+const Employee = require("./lib/Employee");
+const Engineer = require("./lib/Engineer");
+const Intern = require("./lib/Intern");
+const Manager = require("./lib/Manager");
+
+//define officeteam
+let officeTeam = [];
+
+
+//An array of questions for user input regarding manager information
 const start = [
     {
         type: 'input',
@@ -29,7 +37,7 @@ const start = [
     }
 ]
 
-    // add option to choose intern or engineer
+//Option to choose intern or engineer
 const menu = [
     {
         type: 'checkbox',
@@ -39,7 +47,7 @@ const menu = [
     },
 ]
 
-//Create an array of questions for user input regarding an engineer
+//An array of questions for user input regarding an engineer
 const engineer = [
     {
         type: 'input',
@@ -63,7 +71,7 @@ const engineer = [
     }
 ]
 
-//Create an array of questions for user input regarding an intern
+//An array of questions for user input regarding an intern
 const intern = [
     {
         type: 'input',
@@ -87,7 +95,7 @@ const intern = [
     }
 ]
 
-//Create a function to initialize the start questionnaire and lead to the menu
+//A function to initialize the start questionnaire and lead to the menu
 function questions(questionArray) {
     console.log("Initializing App")
     inquirer
@@ -106,7 +114,7 @@ function questions(questionArray) {
     .catch((er) => console.log(er));
 }
 
-//Create a function to write the HTML file
+//A function to write the HTML file
 function createProfile(officeTeam) {
     const profiles = officeTeam.map((employee) => {
         const { name, id, email } = employee;
@@ -130,5 +138,4 @@ function createProfile(officeTeam) {
 }
 
 //Function call to initialize app
-
 questions(start)
