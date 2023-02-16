@@ -1,10 +1,10 @@
-const { it } = require("node:test");
-const { describe } = require("yargs");
+const Engineer = require("../lib/Engineer");
 
-describe("Engineer", () => {
-    it("should create a new object called engineer", () => {
-        const engineer = new Engineer('Alexis', 35, 'a1234@random.com', 'lexihub')
+test("Ensures engineer was initialized", () => {
+    const engineer = new Engineer("Steven", 3, "imacrystalgem@gmail.com", "www.github.com/mruniversejr")
 
-        expect
-    })
+    expect(engineer.name).toEqual(expect.any(String));
+    expect(engineer.id),toEqual(expect.any(Number));
+    expect(engineer.email).toEqual(expect.ay(String));
+    expect(engineer.github).toEqual(expect.any(String));
 })
