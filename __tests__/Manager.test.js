@@ -1,8 +1,10 @@
-const { it } = require("node:test");
-const { describe } = require("yargs");
+const Manager = require("../lib/Manager");
 
-describe("Manager", () => {
-    it("should", () => {
-        
-    })
+test("ensures manager is created", () => {
+    const manager = new Manager("Greg", 200, "mruniverse@email.com", 1)
+
+    expect(manager.name).toEqual(expect.any(String));
+    expect(manager.id).toEqual(expect.any(Number));
+    expect(manager.email).toEqual(expect.any(String));
+    expect(manager.officeNumber).toEqual(expect.any(Number));
 })
