@@ -108,34 +108,12 @@ function questions(questionArray) {
         } else if (employee.continue === 'Add an intern') {
             ask(intern);
         } else {
-            createProfile(officeTeam);
+            generateHTML(officeTeam);
         }
     })
     .catch((er) => console.log(er));
 }
 
-//A function to write the HTML file
-function createProfile(officeTeam) {
-    const profiles = officeTeam.map((employee) => {
-        const { name, id, email } = employee;
-        return new Manager(name, id, email, officeNumber);
-    })
-    
-    if(employee.hasOwnProperty("officeNumber")) {
-        const { officeNumber } = employee;
-        return new Manager(name, id, email, officeNumber);
-    }
-    
-    if(employee.hasOwnProperty('github')) {
-        const {github} = employee;
-        return new Engineer(name, id, email, github);
-    }
-    
-    if(employee.hasOwnProperty('school')) {
-        const {github} = employee;
-        return new Intern(name, id, email, github);
-    }
-}
 
 //Function call to initialize app
 questions(start)
