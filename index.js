@@ -110,10 +110,14 @@ function questions(questionArray) {
         } else {
             generateHTML(officeTeam);
         }
+        //finish up HTML
+        fs.writeFileSync(`./dist/index.html`, `
+        </div>
+        </body>
+        </html>`, {flag: 'a'})
     })
     .catch((er) => console.log(er));
 }
-
 
 //Function call to initialize app
 questions(start)
