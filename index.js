@@ -1,7 +1,7 @@
 //Include Inquirer, file system, and generateMarkdown
 const inquirer = require('inquirer');
 const fs = require('fs');
-const generateHTML = require('./dist/generateHTML');
+const generateHTML = require('./src/generateHTML');
 
 //jest
 const Employee = require("./lib/Employee");
@@ -9,115 +9,164 @@ const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const Manager = require("./lib/Manager");
 
-//define officeteam
-let officeTeam = [];
+//init array to hold roles
+const officeArr = [];
 
-
-//An array of questions for user input regarding manager information
-const start = [
+//inquirer questions for manager role
+const managerRole = [
     {
-        type: 'input',
-        name: 'manager-name',
-        message: "Please enter the team manager's name.",
+        name: 'role',
+        type: 'confirm',
+        message: 'Welcome to the Team Profile Generator. Would you like to create a new team profile?'
     },
     {
-        type: 'input',
-        name: 'manager-id',
-        message: "Please enter the team manager's ID.",
+        name: 'confirmManager',
+        type: 'list',
+        message: "press enter to confirm",
+        choices: [
+            'Manager'
+        ]
     },
     {
+        name: 'name',
         type: 'input',
+        message: 'Enter the name of the manager:',
+    },
+    {
+        name: 'id',
+        type: 'input',
+        message: 'Enter your Employee ID',
+    },
+    {
         name: 'email',
-        message: "Please enter the team manager's email address.",
+        type: 'input',
+        message: 'Enter your email address',
     },
     {
+        name: 'officeNumber',
         type: 'input',
-        name: 'manager-number',
-        message: "Please enter the team manager's office number.",
-    }
-]
+        message: 'Enter your office number',
+    },
+    {
+        name: 'continue',
+        type: 'list',
+        choices: [
+            'Add Engineer',
+            'Add Intern',
+            'Exit'
+        ],
+        message: 'Do you want to continue?'
+    },
+];
 
-//Option to choose intern or engineer
-const menu = [
+// inquirer questions for engineer role
+const engineerRole = [
     {
-        type: 'checkbox',
-        name: 'intern-engineer-finish',
-        message: "Add a team member or finish building your team.",
-        choices: ['Add an engineer', 'Add an intern', 'Finish building your team']
-    },
-]
-
-//An array of questions for user input regarding an engineer
-const engineer = [
-    {
-        type: 'input',
-        name: 'engineer-name',
-        message: "Please enter the engineer's name."
+      name: 'confirmEngineer',
+      type: 'list',
+      message: "Press enter to confirm",
+      choices: [
+        'Engineer'
+    ]
     },
     {
+        name: 'name',
         type: 'input',
-        name: 'engineer-id',
-        message: "Please enter the engineer's ID."
+        message: 'Enter the name of the new engineer',
     },
     {
-        type: 'email',
-        name: 'engineer-email',
-        message: "Please enter the engineer's email address."
+        name: 'id',
+        type: 'input',
+        message: 'Enter the Employee ID of the new engineer',
     },
     {
+        name: 'email',
         type: 'input',
-        name: 'engineer-github',
-        message: "Please enter the engineer's GitHub username."
-    }
-]
-
-//An array of questions for user input regarding an intern
-const intern = [
-    {
-        type: 'input',
-        name: 'intern-name',
-        message: "Please enter the intern's name."
+        message: 'Enter the email address of the new engineer',
     },
     {
+        name: 'github',
         type: 'input',
-        name: 'intern-id',
-        message: "Please enter the intern's ID."
+        message: 'Enter the GitHub username of the new engineer',
     },
     {
-        type: 'input',
-        name: 'intern-email',
-        message: "Please enter the intern's email address."
+        name: 'continue',
+        type: 'list',
+        choices: [
+            'Add Engineer',
+            'Add Intern',
+            'Exit'
+        ],
+        message: 'Do you want to continue?'
+    },
+  ];
+  
+  // inquirer questions for intern role
+  const internRole = [
+    {
+      name: 'confirmIntern',
+      type: 'list',
+      message: "Press enter to confirm",
+      choices: [
+        'Intern'
+    ]
     },
     {
+        name: 'name',
         type: 'input',
-        name: 'intern-school',
-        message: "Please enter the intern's school."
-    }
-]
-
-//A function to initialize the start questionnaire and lead to the menu
-function questions(questionArray) {
-    console.log("Initializing App")
-    inquirer
-    .prompt(questionArray)
-    .then((employee) => {
-        officeTeam.push(employee);
-//Lead to intern or engineer questionnaire or finish the questionnaire depending on user input from menu
-        if (employee.continue === 'Add an engineer') {
-            ask(engineer);
-        } else if (employee.continue === 'Add an intern') {
-            ask(intern);
-        } else {
-            generateHTML(officeTeam);
-        }
-        //finish up HTML
-        fs.writeFileSync(`./dist/index.html`, `
-        </div>
-        </body>
-        </html>`, {flag: 'a'})
-    })
-    .catch((er) => console.log(er));
-}
-
-//Function call to initialize app
-questions(start)
+        message: 'Enter the name of the new intern',
+    },
+    {
+        name: 'id',
+        type: 'input',
+        message: 'Enter the Employee ID of the new intern',
+    },
+    {
+        name: 'email',
+        type: 'input',
+        message: 'Enter the email address of the new intern',
+    },
+    {
+        name: 'school',
+        type: 'input',
+        message: 'Enter the current school for the new intern',
+    },
+    {
+        name: 'continue',
+        type: 'list',
+        choices: [
+            'Add Engineer',
+            'Add Intern',
+            'Exit'
+        ],
+        message: 'Do you want to continue?',
+    },
+  ];
+  
+  // main function takes previously defined role inquirer questions as a parameter
+  function init(rolesArr) {
+   inquirer.prompt(rolesArr)
+    .then((role) => {
+      // pushes pushes role to office array
+      officeArr.push(role);
+      // if "Add Engineer" is selected calls init function and passes engineer inquirer questions
+      if (role.continue === 'Add Engineer') {
+          init(engineerRole);
+      // if "Add Intern" is selected calls init function and passes intern inquirer questions
+      } else if (role.continue === 'Add Intern') {
+          init(internRole);
+      } else {
+      // passes office array to the generateHTML function
+          generateHTML(officeArr);
+  // used to finish HTML 
+  fs.writeFileSync(`./dist/index.html`, `
+  </div>
+  </body>
+  </html>`, {flag: 'a'})
+      }
+  })
+  .catch((err) => console.log(err));
+  }
+  
+  // Function call to initialize app
+  init(managerRole);
